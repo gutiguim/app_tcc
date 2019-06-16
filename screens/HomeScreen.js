@@ -17,7 +17,6 @@ class HomeScreen extends React.Component {
   }
   goToHealthCentersMapScreen() {
     ToastAndroid.show('Ir para a tela de mapa de centros', ToastAndroid.SHORT);
-    this.props.navigation.navigate('SafetyPlan');
   }
   goToSafetyPlanScreen() {
     ToastAndroid.show('Ir para tela de plano de segurança', ToastAndroid.SHORT);
@@ -25,6 +24,7 @@ class HomeScreen extends React.Component {
   }
   goToChecklistEvaluationScreen() {
     ToastAndroid.show('Ir para tela de Auto Avaliação', ToastAndroid.SHORT);
+    this.props.navigation.navigate('ChecklistEvaluation');
   }
   goToRelaxingGuide() {
     ToastAndroid.show('Ir para tela de Guia de relaxamento', ToastAndroid.SHORT);

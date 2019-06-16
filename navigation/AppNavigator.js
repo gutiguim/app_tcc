@@ -5,8 +5,14 @@ import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from '../screens/HomeScreen';
 import InformationScreen from '../screens/InformationScreen';
 import SafetyPlanScreen from '../screens/SafetyPlanScreen';
+import CheclistEvaluationScreen from '../screens/ChecklistEvaluationScreen';
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Information: InformationScreen, SafetyPlan: SafetyPlanScreen });
+const AppStack = createStackNavigator({ 
+  Home: HomeScreen, 
+  Information: InformationScreen, 
+  SafetyPlan: SafetyPlanScreen, 
+  ChecklistEvaluation: CheclistEvaluationScreen
+ });
 
 export default createAppContainer(
   createSwitchNavigator({

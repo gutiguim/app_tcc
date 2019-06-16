@@ -11,7 +11,7 @@ import { Text, View, TextInput } from 'react-native';
 //   onChangeText={password => this.setState({ password })}
 // />
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, autoCorrect }) => {
+const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, autoCorrect, multiline }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
 
   return (
