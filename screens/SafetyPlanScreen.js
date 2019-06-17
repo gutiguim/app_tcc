@@ -368,6 +368,8 @@ const styles = StyleSheet.create({
   contactMiddle: {
     paddingLeft: 30,
     paddingRight: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   contactCrisis: {
     paddingBottom: 20,

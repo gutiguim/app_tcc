@@ -28,6 +28,7 @@ class HomeScreen extends React.Component {
   }
   goToRelaxingGuide() {
     ToastAndroid.show('Ir para tela de Guia de relaxamento', ToastAndroid.SHORT);
+    this.props.navigation.navigate('RelaxingGuide');
   }
 
 
