@@ -8,7 +8,7 @@ import {
 import { Card, CardSection, Button } from '../components/my_components';
 
 
-class CheclistEvaluationScreen extends React.Component {
+class ChecklistEvaluationScreen extends React.Component {
   state = { 
     questionAnswerIndex: 0,
     questions: ['Primeira pergunta:', 'Segunda pergunta:', 'Terceira pergunta:'],
@@ -103,6 +103,7 @@ class CheclistEvaluationScreen extends React.Component {
               checked={this.state.checked[0]}
               value="Value"
               onCheck={this.onCheckFirst.bind(this)}
+              onSelect={onSelect = () => {}}
           />
         </CardSection>
         <CardSection>
@@ -111,6 +112,7 @@ class CheclistEvaluationScreen extends React.Component {
               checked={this.state.checked[1]}
               value="Value"
               onCheck={this.onCheckSecond.bind(this)}
+              onSelect={onSelect = () => {}}
           />
         </CardSection>
         <CardSection>
@@ -119,6 +121,7 @@ class CheclistEvaluationScreen extends React.Component {
               checked={this.state.checked[2]}
               value="Value"
               onCheck={this.onCheckThird.bind(this)}
+              onSelect={onSelect = () => {}}
           />
         </CardSection>
 
@@ -133,7 +136,7 @@ class CheclistEvaluationScreen extends React.Component {
 
 }
 
-CheclistEvaluationScreen.navigationOptions = {
+ChecklistEvaluationScreen.navigationOptions = {
   title: 'Auto Avaliação',
 };
 
@@ -147,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CheclistEvaluationScreen;
+export default ChecklistEvaluationScreen;

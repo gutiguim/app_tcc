@@ -7,18 +7,35 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ContactScreen from '../screens/ContactScreen';
 import ChatCvvScreen from '../screens/ChatCvvScreen';
+
 import InformationScreen from '../screens/InformationScreen';
+import SafetyPlanScreen from '../screens/SafetyPlanScreen';
+import ChecklistEvaluationScreen from '../screens/ChecklistEvaluationScreen';
+import RelaxingGuideScreen from '../screens/RelaxingGuideScreen';
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+  Home: {
+    screen: HomeScreen
+  },
+  Information: {
+    screen: InformationScreen
+  },
+  SafetyPlan: {
+    screen: SafetyPlanScreen
+  },
+  ChecklistEvaluation: {
+    screen: ChecklistEvaluationScreen
+  },
+  RelaxingGuide: {
+    screen: RelaxingGuideScreen
+  }
 
+});
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'HomeTest',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -31,6 +48,24 @@ HomeStack.navigationOptions = {
   ),
 };
 
+// const HomeStack = createStackNavigator({
+//   Home: HomeScreen,
+// });
+
+// HomeStack.navigationOptions = {
+//   tabBarLabel: 'Home',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? 'md-home'
+//           : 'md-home'
+//       }
+//     />
+//   ),
+// };
+
 const ContactsStack = createStackNavigator({
   Links: ContactScreen,
 });
@@ -41,20 +76,6 @@ ContactsStack.navigationOptions = {
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'md-contact' : 'md-contact'}
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
   ),
 };
@@ -73,11 +94,11 @@ ChatCvvStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
+const AboutStack = createStackNavigator({
   Settings: SettingsScreen,
 });
 
-SettingsStack.navigationOptions = {
+AboutStack.navigationOptions = {
   tabBarLabel: 'Sobre',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -90,7 +111,8 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
+  // HomeStack,
   ContactsStack,
   ChatCvvStack,
-  SettingsStack,
+  AboutStack,
 });

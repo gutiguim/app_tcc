@@ -1,17 +1,29 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import TabBarIcon from '../components/TabBarIcon';
+import { Linking } from 'expo';
 
-export default function ChatCvvScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
-  );
+class ChatCvvScreen extends React.Component {
+  openCVVChat() {
+    Linking.openURL('https://www.cvv.org.br/chat/');
+  }
+
+  render() {
+    return (
+      <View style={styles.centerInside}>
+        <TouchableOpacity style={styles.itemsInsideCentered} onPress={this.openCVVChat.bind(this)}>
+          <TabBarIcon
+            name={
+              Platform.OS === 'ios'
+                ? 'ios-chatboxes'
+                : 'md-chatboxes'
+            }
+          />
+          <Text>Abrir chat com CVV</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 ChatCvvScreen.navigationOptions = {
@@ -19,9 +31,16 @@ ChatCvvScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  centerInside: {
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemsInsideCentered: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
+export default ChatCvvScreen;

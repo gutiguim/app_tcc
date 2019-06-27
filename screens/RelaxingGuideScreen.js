@@ -13,7 +13,7 @@ import AlbumList from '../components/my_components/AlbumList';
 import TabBarIcon from '../components/TabBarIcon';
 import { Card, CardSection } from '../components/my_components';
 
-class InformationScreen extends React.Component {
+class RelaxingGuideScreen extends React.Component {
 
   listenGuide1() {
     // TODO LISTEN GUIDE 1
@@ -82,7 +82,7 @@ class InformationScreen extends React.Component {
 
 }
 
-InformationScreen.navigationOptions = {
+RelaxingGuideScreen.navigationOptions = {
   title: 'Informações',
 };
 
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InformationScreen;
+export default RelaxingGuideScreen;
