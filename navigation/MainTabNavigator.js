@@ -15,6 +15,7 @@ import InformationScreen from '../screens/InformationScreen';
 import SafetyPlanScreen from '../screens/SafetyPlanScreen';
 import ChecklistEvaluationScreen from '../screens/ChecklistEvaluationScreen';
 import RelaxingGuideScreen from '../screens/RelaxingGuideScreen';
+import HealthCentersMapScreen from '../screens/HealthCentersMapScreen';
 
 const HomeStack = createStackNavigator({
   Home: {
@@ -31,8 +32,10 @@ const HomeStack = createStackNavigator({
   },
   RelaxingGuide: {
     screen: RelaxingGuideScreen
-  }
-
+  },
+  HealthCentersMap: {
+    screen: HealthCentersMapScreen
+  },
 });
 HomeStack.navigationOptions = {
   tabBarLabel: 'HomeTest',

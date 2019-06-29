@@ -6,28 +6,29 @@ import {
   View,
   Platform,
   TouchableOpacity,
-  ToastAndroid,
+  // ToastAndroid,
 } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 
 class HomeScreen extends React.Component {
   goToInformationScreen() {
-    ToastAndroid.show('Ir para tela de informações', ToastAndroid.SHORT);
+    // ToastAndroid.show('Ir para tela de informações', ToastAndroid.SHORT);
     this.props.navigation.navigate('Information');
   }
   goToHealthCentersMapScreen() {
-    ToastAndroid.show('Ir para a tela de mapa de centros', ToastAndroid.SHORT);
+    // ToastAndroid.show('Ir para a tela de mapa de centros', ToastAndroid.SHORT);
+    this.props.navigation.navigate('HealthCentersMap');
   }
   goToSafetyPlanScreen() {
-    ToastAndroid.show('Ir para tela de plano de segurança', ToastAndroid.SHORT);
+    // ToastAndroid.show('Ir para tela de plano de segurança', ToastAndroid.SHORT);
     this.props.navigation.navigate('SafetyPlan');
   }
   goToChecklistEvaluationScreen() {
-    ToastAndroid.show('Ir para tela de Auto Avaliação', ToastAndroid.SHORT);
+    // ToastAndroid.show('Ir para tela de Auto Avaliação', ToastAndroid.SHORT);
     this.props.navigation.navigate('ChecklistEvaluation');
   }
   goToRelaxingGuide() {
-    ToastAndroid.show('Ir para tela de Guia de relaxamento', ToastAndroid.SHORT);
+    // ToastAndroid.show('Ir para tela de Guia de relaxamento', ToastAndroid.SHORT);
     this.props.navigation.navigate('RelaxingGuide');
   }
 

@@ -1,11 +1,6 @@
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
-import HomeScreen from '../screens/HomeScreen';
-import InformationScreen from '../screens/InformationScreen';
-import SafetyPlanScreen from '../screens/SafetyPlanScreen';
-import ChecklistEvaluationScreen from '../screens/ChecklistEvaluationScreen';
-import RelaxingGuideScreen from '../screens/RelaxingGuideScreen';
 
 export default createAppContainer(
   createSwitchNavigator({

@@ -6,23 +6,50 @@ import {
   View,
   TouchableOpacity,
   KeyboardAvoidingView,
+  AsyncStorage,
+  ToastAndroid,
+  Linking,
+  Permissions,
+  PermissionsAndroid,
+  Alert,
 } from 'react-native';
+import * as Contacts from 'expo-contacts';
 import { Card, CardSection, Button, InputNoLabel } from '../components/my_components';
 import TabBarIcon from '../components/TabBarIcon';
 
-
 class SafetyPlanScreen extends React.Component {
-  state = { 
+  INITIAL_STATE = {
     alertSigns: ['', '', '', ''],
     copingStrategy: ['', '', '', ''],
-    contacts: [{ name: 'Test1', number: '' }, { name: 'Test2', number: '' }, { name: 'Test3', number: '' }], 
-    contactCrisisCenter: { name: 'Centro de Crise', phone: '' },  
+    contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    contactCrisisCenter: { name: '', phone: '' },  
     reasonsToLive: ['', '', '', ''],
     placesToDistract: ['', '', '', ''],
     reducingRisks: ['', '', '', ''],
     recovery: '',
-    professionalsToCall: [{ name: 'Test1', number: '' }, { name: 'Test2', number: '' }, { name: 'Test3', number: '' }], 
+    professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
   //   keepingEnvironmentSafe: '',
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      alertSigns: ['', '', '', ''],
+      copingStrategy: ['', '', '', ''],
+      contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+      contactCrisisCenter: { name: '', phone: '' },  
+      reasonsToLive: ['', '', '', ''],
+      placesToDistract: ['', '', '', ''],
+      reducingRisks: ['', '', '', ''],
+      recovery: '',
+      professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    //   keepingEnvironmentSafe: '',
+     };
+  }
+
+  handleCall = (number) => {
+    // WebBrowser.openBrowserAsync('http://docs.expo.io');
+    Linking.openURL(`tel:${number}`);
   };
 
   onAlertSignsChange(text, index) {
@@ -107,6 +134,11 @@ class SafetyPlanScreen extends React.Component {
 
   onChangeContact(index, name, number) {
     // TODO -> IF EXISTS CALLS, IF DOESNT ADD NUMBER
+    if (name !== '' || number !== '') {
+      this.handleCall(parseInt(number, 10));
+    } else {
+      // SHOW INPUT FOR GETTING CONTACT
+    }
     // this.setState(state => {
     //   const contacts = state.contacts.map((item, j) => {
     //     if (j === index) {
@@ -143,11 +175,40 @@ class SafetyPlanScreen extends React.Component {
     // TODO -> IF EXISTS CALLS, IF DOESNT ADD NUMBER
   }
 
-  onButtonPress() {
+  getStateFromStorageAndSetState = async () => {
+    let value;
+    try {
+      value = await AsyncStorage.getItem('safetyPlanScreenState');
+    } catch (error) {
+      ToastAndroid.show('Não foi possível carregar as informações', ToastAndroid.SHORT);
+    }
 
+    this.setStorageState(value);
+    return value;
   }
- 
+
+  setStorageState(newState) {
+    const parse = JSON.parse(newState);
+    this.setState(parse);
+  }
+
+  componentDidMount() {
+    this.getStateFromStorageAndSetState();
+  }
+
+  onButtonPress = async () => {
+    const saveState = JSON.stringify(this.state);
+    console.log(saveState);
+
+    try {
+      await AsyncStorage.setItem('safetyPlanScreenState', saveState);
+    } catch (error) {
+      ToastAndroid.show('Não foi possível salvar as informações', ToastAndroid.SHORT);
+    }
+  };
+
   // TODO Future -> Hide each BIG CardSection in a button
+  // TODO ADD METHOD TO CHANGE NUMBER
 
   render() {
     return (
@@ -190,24 +251,23 @@ class SafetyPlanScreen extends React.Component {
               </View>
             </CardSection>
 
-            {/* TODO ADD METHOD TO CHANGE NUMBER */}
             <CardSection>
               <View style={styles.contactRow}>
-                <TouchableOpacity style={styles.contacts} onPress={this.onChangeContact(0, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeContact(0, '', '')}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
                   <Text>{this.state.contacts[0].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contactMiddle} onPress={this.onChangeContact(1, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contactMiddle} onPress={() => this.onChangeContact(1, 'name', 99999999)}>
                   <TabBarIcon 
                     name={'md-contact'}
                   />
                   <Text>{this.state.contacts[1].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contacts} onPress={this.onChangeContact(2, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeContact(2, 'name', 99999999)}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
@@ -216,7 +276,6 @@ class SafetyPlanScreen extends React.Component {
               </View>
             </CardSection>
 
-            {/* TODO ADD METHOD TO CHANGE NUMBER */}
             <CardSection>
               <View style={styles.contactColumn}>
                 <TouchableOpacity style={styles.contactCrisisTouchableOpacity} onPress={this.onChangeContactCrisisCenter('name', 99999999)}>
