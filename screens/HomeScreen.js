@@ -6,6 +6,7 @@ import {
   View,
   Platform,
   TouchableOpacity,
+  Linking,
   // ToastAndroid,
 } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
@@ -17,7 +18,8 @@ class HomeScreen extends React.Component {
   }
   goToHealthCentersMapScreen() {
     // ToastAndroid.show('Ir para a tela de mapa de centros', ToastAndroid.SHORT);
-    this.props.navigation.navigate('HealthCentersMap');
+    // this.props.navigation.navigate('HealthCentersMap');
+    Linking.openURL('https://www.google.com/maps/search/?api=1&query=centro+de+saude');
   }
   goToSafetyPlanScreen() {
     // ToastAndroid.show('Ir para tela de plano de segurança', ToastAndroid.SHORT);
@@ -51,11 +53,12 @@ class HomeScreen extends React.Component {
           </TouchableOpacity>
   
           <TouchableOpacity style={styles.itemNoBorder} onPress={this.goToHealthCentersMapScreen.bind(this)}>
-            <Image
-              source={
-                  require('../assets/images/robot-prod.png')
+            <TabBarIcon
+              name={
+                Platform.OS === 'ios'
+                  ? 'ios-heart'
+                  : 'md-heart'
               }
-              style={styles.welcomeImage}
             />
             <Text>Centros Próximos</Text>
           </TouchableOpacity>
@@ -63,33 +66,36 @@ class HomeScreen extends React.Component {
         </View>
   
         <TouchableOpacity style={styles.getStartedContainerInside1Alone} onPress={this.goToSafetyPlanScreen.bind(this)}>
-            <Image
-              source={
-                  require('../assets/images/robot-dev.png')
-              }
-              style={styles.welcomeImage}
-            />
-            <Text>Plano de Segurança</Text>
+          <TabBarIcon
+            name={
+              Platform.OS === 'ios'
+                ? 'ios-today'
+                : 'md-today'
+            }
+          />
+          <Text>Plano de Segurança</Text>
         </TouchableOpacity>
   
         <View style={styles.getStartedContainerInside}>
   
           <TouchableOpacity style={styles.itemBorderRight} onPress={this.goToChecklistEvaluationScreen.bind(this)}>
-            <Image
-              source={
-                  require('../assets/images/robot-dev.png')
+            <TabBarIcon
+              name={
+                Platform.OS === 'ios'
+                  ? 'ios-stats'
+                  : 'md-stats'
               }
-              style={styles.welcomeImage}
             />
             <Text>Auto Avaliação</Text>
           </TouchableOpacity>
   
           <TouchableOpacity style={styles.itemNoBorder} onPress={this.goToRelaxingGuide.bind(this)}>
-            <Image
-              source={
-                  require('../assets/images/robot-prod.png')
+            <TabBarIcon
+              name={
+                Platform.OS === 'ios'
+                  ? 'ios-body'
+                  : 'md-body'
               }
-              style={styles.welcomeImage}
             />
             <Text>Guias de Relaxamento</Text>
           </TouchableOpacity>

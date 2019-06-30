@@ -9,11 +9,8 @@ import {
   AsyncStorage,
   ToastAndroid,
   Linking,
-  Permissions,
-  PermissionsAndroid,
-  Alert,
 } from 'react-native';
-import * as Contacts from 'expo-contacts';
+import DialogInput from 'react-native-dialog-input';
 import { Card, CardSection, Button, InputNoLabel } from '../components/my_components';
 import TabBarIcon from '../components/TabBarIcon';
 
@@ -43,6 +40,13 @@ class SafetyPlanScreen extends React.Component {
       reducingRisks: ['', '', '', ''],
       recovery: '',
       professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+      isNameContactDialogVisible: false,
+      isNumberContactDialogVisible: false,
+      isNameContactCrisisCenterDialogVisible: false,
+      isNumberContactCrisisCenterDialogVisible: false,
+      isNameProfessionalsToCallDialogVisible: false,
+      isNumberProfessionalsToCallDialogVisible: false,
+      auxiliarIndex: 0,
     //   keepingEnvironmentSafe: '',
      };
   }
@@ -137,6 +141,8 @@ class SafetyPlanScreen extends React.Component {
     if (name !== '' || number !== '') {
       this.handleCall(parseInt(number, 10));
     } else {
+      this.setState({ auxiliarIndex: index });
+      this.setState({ isNameContactDialogVisible: true });
       // SHOW INPUT FOR GETTING CONTACT
     }
     // this.setState(state => {
@@ -179,21 +185,83 @@ class SafetyPlanScreen extends React.Component {
     let value;
     try {
       value = await AsyncStorage.getItem('safetyPlanScreenState');
+      if (value !== null) {
+        this.setStorageState(value);
+        return value;
+      }
     } catch (error) {
       ToastAndroid.show('Não foi possível carregar as informações', ToastAndroid.SHORT);
     }
-
-    this.setStorageState(value);
-    return value;
   }
 
   setStorageState(newState) {
     const parse = JSON.parse(newState);
     this.setState(parse);
+    this.setState({ isNameContactDialogVisible: false });
+    this.setState({ isNumberContactDialogVisible: false });
+
+    this.setState({ isNameContactCrisisCenterDialogVisible: false });
+    this.setState({ isNumberContactCrisisCenterDialogVisible: false });
+
+    this.setState({ isNameProfessionalsToCallDialogVisible: false });
+    this.setState({ isNumberProfessionalsToCallDialogVisible: false });
   }
 
   componentDidMount() {
     this.getStateFromStorageAndSetState();
+  }
+
+  sendContactInformation(stateParameter, inputText) {
+    const index = this.state.auxiliarIndex;
+    const stateParameterIndex = (this.state[stateParameter][index]);
+    switch (stateParameter) {
+      case 'contacts':
+        // console.log("AAAAAAA");
+        // console.log('TEST: ');
+        // console.log(stateParameterIndex);
+        // this.setState({ [this.state[stateParameter][index]]: { name: inputText, number: this.state[stateParameter][index].number } });
+        // console.log("BBBBBBB");
+        // console.log(this.state);
+        break;
+      case 'contactCrisisCenter':
+
+        break;
+      case 'professionalsToCall':
+
+        break;
+    
+      default:
+        break;
+    }
+
+    /*
+      contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+      contactCrisisCenter: { name: '', phone: '' }, 
+      professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    */
+
+    this.setState({ isNameContactDialogVisible: false });
+    this.setState({ isNumberContactDialogVisible: true });
+  }
+
+  sendContactInformation2(stateParameter, inputText) {
+    const index = this.auxiliarIndex;
+    switch (stateParameter) {
+      case 'contacts':
+        
+        break;
+      case 'contactCrisisCenter':
+
+        break;
+      case 'professionalsToCall':
+
+        break;
+    
+      default:
+        break;
+    }
+
+    this.setState({ isNumberContactDialogVisible: false });
   }
 
   onButtonPress = async () => {
@@ -351,7 +419,7 @@ class SafetyPlanScreen extends React.Component {
                       placeholder="Digite como reduzir riscos"
                       onChangeText={recovery => this.setState({ recovery })}
                       value={this.state.recovery}
-                      multiline={true}
+                      multiline
                     />
                   </CardSection>
               </View>
@@ -389,6 +457,58 @@ class SafetyPlanScreen extends React.Component {
             </CardSection>
           </Card>
         </ScrollView>
+
+        <DialogInput 
+            isDialogVisible={this.state.isNameContactDialogVisible}
+            title={'Contato'}
+            message={'Digite o nome do contato'}
+            hintInput={'Nome'}
+            submitInput={(inputText) => { this.sendContactInformation('contacts', inputText); }}
+            closeDialog={() => { this.setState({ isNameContactDialogVisible: false }); }}>
+        </DialogInput>
+        <DialogInput 
+            isDialogVisible={this.state.isNumberContactDialogVisible}
+            title={'Contato'}
+            message={'Digite o número do contato'}
+            hintInput={'Número'}
+            submitInput={(inputText) => { this.sendContactInformation2('contacts', inputText); }}
+            closeDialog={() => { this.setState({ isNumberContactDialogVisible: false }); }}>
+        </DialogInput>
+
+        <DialogInput 
+            isDialogVisible={this.state.isNameContactCrisisCenterDialogVisible}
+            title={'Contato de centro de saúde'}
+            message={'Digite o nome do centro de saúde'}
+            hintInput={'Nome'}
+            submitInput={(inputText) => { this.sendContactInformation('contactCrisisCenter', inputText); }}
+            closeDialog={() => { this.setState({ isNameContactCrisisCenterDialogVisible: false }); }}>
+        </DialogInput>
+        <DialogInput 
+            isDialogVisible={this.state.isNumberContactCrisisCenterDialogVisible}
+            title={'Contato de centro de saúde'}
+            message={'Digite o número do centro de saúde'}
+            hintInput={'Número'}
+            submitInput={(inputText) => { this.sendContactInformation2('contactCrisisCenter', inputText); }}
+            closeDialog={() => { this.setState({ isNumberContactCrisisCenterDialogVisible: false }); }}>
+        </DialogInput>
+
+        <DialogInput 
+            isDialogVisible={this.state.isNameProfessionalsToCallDialogVisible}
+            title={'Contato de profissionais'}
+            message={'Digite o nome do profissional'}
+            hintInput={'Nome'}
+            submitInput={(inputText) => { this.sendContactInformation('professionalsToCall', inputText); }}
+            closeDialog={() => { this.setState({ isNameProfessionalsToCallDialogVisible: false }); }}>
+        </DialogInput>
+        <DialogInput 
+            isDialogVisible={this.state.isNumberProfessionalsToCallDialogVisible}
+            title={'Contato de profissionais'}
+            message={'Digite o número do profissional'}
+            hintInput={'Número'}
+            submitInput={(inputText) => { this.sendContactInformation2('professionalsToCall', inputText); }}
+            closeDialog={() => { this.setState({ isNumberContactCrisisCenterDialogVisible: false }); }}>
+        </DialogInput>
+
       </KeyboardAvoidingView>
     );
   }

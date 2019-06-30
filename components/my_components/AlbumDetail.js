@@ -1,50 +1,37 @@
 import React from 'react';
-import { Text, View, Image, Linking } from 'react-native';
+import { Text, View, Image, Linking, TouchableOpacity } from 'react-native';
 // import Card from './Card';
 // import CardSection from './CardSection';
 // import Button from './Button';
 
-import { Card, CardSection, Button } from '../my_components';
+import { Card, CardSection } from '../my_components';
 
 // const AlbumDetail = (props) => {
 // const AlbumDetail = ({ album }) => {
 const AlbumDetail = ({ album }) => {
-  const { title, artist, thumbnail_image, image, url } = album;
+  const { title, image, url } = album;
   const {
-    thumbnailStyle,
     headerContentStyle,
-    thumbnailContainerStyle,
     headerTextStyle,
     imageStyle
   } = styles;
 
   return (
     <Card>
-      <CardSection>
-        <View style={thumbnailContainerStyle}>
+      <TouchableOpacity onPress={() => Linking.openURL(url)}>
+        <CardSection>
+          <View style={headerContentStyle}>
+            <Text style={headerTextStyle}>{title}</Text>
+          </View>
+        </CardSection>
+
+        <CardSection>
           <Image
-            style={thumbnailStyle}
-            source={{ uri: thumbnail_image }}
+            style={imageStyle}
+            source={{ uri: image }}
           />
-        </View>
-        <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{title}</Text>
-          <Text>{artist}</Text>
-        </View>
-      </CardSection>
-
-      <CardSection>
-        <Image
-          style={imageStyle}
-          source={{ uri: image }}
-        />
-      </CardSection>
-
-      <CardSection>
-        <Button onPress={() => Linking.openURL(url)}>
-          Buy Now
-        </Button>
-      </CardSection>
+        </CardSection>
+      </TouchableOpacity>
     </Card>
   );
 };
