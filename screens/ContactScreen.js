@@ -136,7 +136,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(0, 'contact0')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact0.name}</Text>
@@ -150,7 +153,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(1, 'contact1')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact1.name}</Text>
@@ -164,7 +170,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(2, 'contact2')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact2.name}</Text>
@@ -178,7 +187,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(3, 'contact3')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact3.name}</Text>
@@ -192,7 +204,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(4, 'contact4')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact4.name}</Text>
@@ -206,7 +221,10 @@ class ContactSreen extends React.Component {
             onPress={() => this.handleCall(5, 'contact5')}>
             <View style={{ flexDirection: 'row' }}>
               <View style={styles.optionIconContainer}>
-                <Ionicons name="ios-chatboxes" size={22} color="#ccc" />
+                <Image             
+                  style={{ width: 40, height: 40 }}
+                  source={require('../assets/images/chatCVV.png')}
+                />
               </View>
               <View style={styles.optionTextContainer}>
                 <Text style={styles.optionText}>{this.state.contact5.name}</Text>

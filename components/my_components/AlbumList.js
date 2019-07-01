@@ -8,11 +8,10 @@ class AlbumList extends Component {
 
   state = { 
     information: [
-      { title: 'Saúde mental', image: 'https://drauziovarella.uol.com.br/wp-content/uploads/2012/10/cerebro-e1552586077908.jpg', url: 'https://drauziovarella.uol.com.br/entrevistas-2/saude-mental-entrevista/' },
-      { title: 'Ansiedade', image: 'http://portalamigodoidoso.com.br/wp-content/uploads/2017/10/ansiedade.png', url: 'https://www.minhavida.com.br/saude/temas/ansiedade' },
-      { title: 'Distimia', image: 'https://drauziovarella.uol.com.br/wp-content/uploads/2012/01/201903_drauzio_homem-triste-tedio_33997609_londondeposit_1000x563.jpg', url: 'https://drauziovarella.uol.com.br/entrevistas-2/distimia-entrevista/' },
-      { title: 'Depressão', image: 'https://drauziovarella.uol.com.br/wp-content/uploads/2013/03/dv-mulher-ansiedade-1000x563.jpg', url: 'https://drauziovarella.uol.com.br/doencas-e-sintomas/depressao/' },
-      { title: 'Transtorno do estresse pós-traumático', image: 'https://drauziovarella.uol.com.br/wp-content/uploads/2012/05/iStock_000014716501Small_wragg_destaque11-e1357567791428.jpg', url: 'https://drauziovarella.uol.com.br/doencas-e-sintomas/transtorno-do-estresse-pos-traumatico/' },
+      { title: 'Dicas para controlar ansiedade', image: 'http://portalamigodoidoso.com.br/wp-content/uploads/2017/10/ansiedade.png', url: 'https://www.sbcoaching.com.br/blog/qualidade-de-vida/como-controlar-ansiedade/' },
+      { title: 'Sinais de alerta para riscos de suicídio', image: 'https://abrilsaude.files.wordpress.com/2017/11/suicidio-01.jpg', url: 'https://www.buzzfeed.com/br/annaborges/sinais-de-alerta-do-suicidio' },
+      { title: 'Sugestões de como agir em relação ao comportamento suicida', image: 'https://drauziovarella.uol.com.br/wp-content/uploads/2012/10/cerebro-e1552586077908.jpg', url: 'https://drauziovarella.uol.com.br/entrevistas-2/distimia-entrevista/' },
+      { title: 'Prevenção ao suicídio', image: 'https://uploads.bemparana.com.br/upload/image/noticia/noticia_741062_img1_setembroamarelo.jpg', url: 'https://www.polbr.med.br/ano17/wal0817.php' },
     ],
     relaxingGuides: [
       { title: 'Estratégia de relaxamento', image: 'https://amenteemaravilhosa.com.br/wp-content/uploads/2017/05/Jacobson1.png', url: 'http://possibilidades.com.br/meditacao/relaxamento.asp' },

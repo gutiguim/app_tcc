@@ -10,13 +10,12 @@ import { View, TextInput } from 'react-native';
 //   onChangeText={password => this.setState({ password })}
 // />
 
-const InputNoLabel = ({ id, value, onChangeText, placeholder, secureTextEntry, autoCorrect, multiline }) => {
+const InputNoLabel = ({ value, onChangeText, placeholder, secureTextEntry, autoCorrect, multiline }) => {
   const { inputStyle, containerStyle } = styles;
 
   return (
     <View style={containerStyle}>
       <TextInput
-        id={id}
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         autoCorrect={autoCorrect}

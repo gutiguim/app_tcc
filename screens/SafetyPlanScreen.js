@@ -289,9 +289,8 @@ class SafetyPlanScreen extends React.Component {
                   Sinais de alerta:
                 </Text>
                 {this.state.alertSigns.map((item, index) => (
-                  <CardSection>
+                  <CardSection key={`${index}alertSigns`} >
                     <InputNoLabel
-                      id={index}
                       placeholder="Digite um sinal de alerta"
                       onChangeText={text => this.onAlertSignsChange(text, index)}
                       value={this.state.alertSigns[index]}
@@ -307,9 +306,8 @@ class SafetyPlanScreen extends React.Component {
                   Estratégias de enfrentamento:
                 </Text>
                 {this.state.copingStrategy.map((item, index) => (
-                  <CardSection>
+                  <CardSection key={`${index}coping`}>
                     <InputNoLabel
-                      id={index}
                       placeholder="Digite uma estratégia"
                       onChangeText={text => this.onCopingStrategyChange(text, index)}
                       value={this.state.copingStrategy[index]}
@@ -361,9 +359,8 @@ class SafetyPlanScreen extends React.Component {
                   Razões para viver:
                 </Text>
                 {this.state.reasonsToLive.map((item, index) => (
-                  <CardSection>
+                  <CardSection key={`${index}reasonToLive`}>
                     <InputNoLabel
-                      id={index}
                       placeholder="Digite uma razão para viver"
                       onChangeText={text => this.onReasonsToLiveChange(text, index)}
                       value={this.state.reasonsToLive[index]}
@@ -379,9 +376,8 @@ class SafetyPlanScreen extends React.Component {
                   Lugares para se distrair:
                 </Text>
                 {this.state.placesToDistract.map((item, index) => (
-                  <CardSection>
+                  <CardSection key={`${index}olaceToDistract`}>
                     <InputNoLabel
-                      id={index}
                       placeholder="Digite um lugar para se distrair"
                       onChangeText={text => this.onPlacesToDistractChange(text, index)}
                       value={this.state.placesToDistract[index]}
@@ -397,9 +393,8 @@ class SafetyPlanScreen extends React.Component {
                   Como reduzir riscos:
                 </Text>
                 {this.state.reducingRisks.map((item, index) => (
-                  <CardSection>
+                  <CardSection key={`${index}reducingRisks`}>
                     <InputNoLabel
-                      id={index}
                       placeholder="Digite como reduzir riscos"
                       onChangeText={text => this.onReducingRisksChange(text, index)}
                       value={this.state.reducingRisks[index]}

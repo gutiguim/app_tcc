@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
-import TabBarIcon from '../components/TabBarIcon';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Linking } from 'expo';
 
 class ChatCvvScreen extends React.Component {
@@ -12,11 +11,10 @@ class ChatCvvScreen extends React.Component {
     return (
       <View style={styles.centerInside}>
         <TouchableOpacity style={styles.itemsInsideCentered} onPress={this.openCVVChat.bind(this)}>
-          <TabBarIcon
-            name={
-              Platform.OS === 'ios'
-                ? 'ios-chatboxes'
-                : 'md-chatboxes'
+          <Image
+            style={{ width: 250, height: 250 }}
+            source={
+                require('../assets/images/chatCVV.png')
             }
           />
           <Text>Abrir chat com CVV</Text>

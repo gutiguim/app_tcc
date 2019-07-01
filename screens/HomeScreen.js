@@ -42,22 +42,20 @@ class HomeScreen extends React.Component {
         <View style={styles.getStartedContainerInside}>
   
           <TouchableOpacity style={styles.itemBorderRight} onPress={this.goToInformationScreen.bind(this)}>
-            <TabBarIcon
-              name={
-                Platform.OS === 'ios'
-                  ? 'ios-information-circle'
-                  : 'md-information-circle'
+            <Image
+              style={{ width: 75, height: 75 }}
+              source={
+                  require('../assets/images/information2.png')
               }
             />
             <Text>Informações</Text>
           </TouchableOpacity>
   
           <TouchableOpacity style={styles.itemNoBorder} onPress={this.goToHealthCentersMapScreen.bind(this)}>
-            <TabBarIcon
-              name={
-                Platform.OS === 'ios'
-                  ? 'ios-heart'
-                  : 'md-heart'
+            <Image
+              style={{ width: 75, height: 75 }}
+              source={
+                  require('../assets/images/maps.png')
               }
             />
             <Text>Centros Próximos</Text>
@@ -66,11 +64,10 @@ class HomeScreen extends React.Component {
         </View>
   
         <TouchableOpacity style={styles.getStartedContainerInside1Alone} onPress={this.goToSafetyPlanScreen.bind(this)}>
-          <TabBarIcon
-            name={
-              Platform.OS === 'ios'
-                ? 'ios-today'
-                : 'md-today'
+          <Image
+            style={{ width: 75, height: 75 }}
+            source={
+                require('../assets/images/plan.png')
             }
           />
           <Text>Plano de Segurança</Text>
@@ -79,22 +76,20 @@ class HomeScreen extends React.Component {
         <View style={styles.getStartedContainerInside}>
   
           <TouchableOpacity style={styles.itemBorderRight} onPress={this.goToChecklistEvaluationScreen.bind(this)}>
-            <TabBarIcon
-              name={
-                Platform.OS === 'ios'
-                  ? 'ios-stats'
-                  : 'md-stats'
+            <Image
+              style={{ width: 75, height: 75 }}
+              source={
+                  require('../assets/images/checklist.png')
               }
             />
             <Text>Auto Avaliação</Text>
           </TouchableOpacity>
   
           <TouchableOpacity style={styles.itemNoBorder} onPress={this.goToRelaxingGuide.bind(this)}>
-            <TabBarIcon
-              name={
-                Platform.OS === 'ios'
-                  ? 'ios-body'
-                  : 'md-body'
+            <Image
+              style={{ width: 75, height: 75 }}
+              source={
+                  require('../assets/images/relaxing.png')
               }
             />
             <Text>Guias de Relaxamento</Text>
@@ -141,12 +136,12 @@ const styles = StyleSheet.create({
     flexBasis: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    // borderBottomWidth: 1,
   },
   itemBorderRight: {
     flex: 1,
-    borderRightWidth: 1,
+    // borderRightWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
