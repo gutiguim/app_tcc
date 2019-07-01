@@ -14,10 +14,10 @@ class ChatCvvScreen extends React.Component {
           <Image
             style={{ width: 250, height: 250 }}
             source={
-                require('../assets/images/chatCVV.png')
+                require('../assets/images/chatCVV2.png')
             }
           />
-          <Text>Abrir chat com CVV</Text>
+          <Text style={styles.font}>Abrir chat com CVV</Text>
         </TouchableOpacity>
       </View>
     );
@@ -39,6 +39,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  font: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  }
 });
 
 export default ChatCvvScreen;

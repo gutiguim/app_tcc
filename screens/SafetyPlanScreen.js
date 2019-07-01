@@ -19,12 +19,19 @@ class SafetyPlanScreen extends React.Component {
     alertSigns: ['', '', '', ''],
     copingStrategy: ['', '', '', ''],
     contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
-    contactCrisisCenter: { name: '', phone: '' },  
+    contactCrisisCenter: { name: '', number: '' },  
     reasonsToLive: ['', '', '', ''],
     placesToDistract: ['', '', '', ''],
     reducingRisks: ['', '', '', ''],
     recovery: '',
     professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    isNameContactDialogVisible: false,
+    isNumberContactDialogVisible: false,
+    isNameContactCrisisCenterDialogVisible: false,
+    isNumberContactCrisisCenterDialogVisible: false,
+    isNameProfessionalsToCallDialogVisible: false,
+    isNumberProfessionalsToCallDialogVisible: false,
+    auxiliarIndex: 0,
   //   keepingEnvironmentSafe: '',
   };
 
@@ -34,7 +41,7 @@ class SafetyPlanScreen extends React.Component {
       alertSigns: ['', '', '', ''],
       copingStrategy: ['', '', '', ''],
       contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
-      contactCrisisCenter: { name: '', phone: '' },  
+      contactCrisisCenter: { name: '', number: '' },  
       reasonsToLive: ['', '', '', ''],
       placesToDistract: ['', '', '', ''],
       reducingRisks: ['', '', '', ''],
@@ -137,48 +144,34 @@ class SafetyPlanScreen extends React.Component {
   }
 
   onChangeContact(index, name, number) {
-    // TODO -> IF EXISTS CALLS, IF DOESNT ADD NUMBER
-    if (name !== '' || number !== '') {
-      this.handleCall(parseInt(number, 10));
+    const auxiliarStateModifier = this.state.contacts.slice();
+
+    if (auxiliarStateModifier[index].name !== '' || auxiliarStateModifier[index].number !== '') {
+      this.handleCall(parseInt(auxiliarStateModifier[index].number, 10));
     } else {
       this.setState({ auxiliarIndex: index });
       this.setState({ isNameContactDialogVisible: true });
-      // SHOW INPUT FOR GETTING CONTACT
     }
-    // this.setState(state => {
-    //   const contacts = state.contacts.map((item, j) => {
-    //     if (j === index) {
-    //       return { name, number };
-    //     } else {
-    //       return item;
-    //     }
-    //   });
-
-    //   return {
-    //     contacts,
-    //   };
-    // });
   }
 
   onChangeProfessionalsToCall(index, name, number) {
-    // TODO -> IF EXISTS CALLS, IF DOESNT ADD NUMBER
-    // this.setState(state => {
-    //   const contacts = state.contacts.map((item, j) => {
-    //     if (j === index) {
-    //       return { name, number };
-    //     } else {
-    //       return item;
-    //     }
-    //   });
+    const auxiliarStateModifier = this.state.professionalsToCall.slice();
 
-    //   return {
-    //     contacts,
-    //   };
-    // });
+    if (auxiliarStateModifier[index].name !== '' || auxiliarStateModifier[index].number !== '') {
+      this.handleCall(parseInt(auxiliarStateModifier[index].number, 10));
+    } else {
+      this.setState({ auxiliarIndex: index });
+      this.setState({ isNameProfessionalsToCallDialogVisible: true });
+    }
   }
 
   onChangeContactCrisisCenter(name, number) {
-    // TODO -> IF EXISTS CALLS, IF DOESNT ADD NUMBER
+    console.log(this.state);
+    if (this.state.contactCrisisCenter.name !== '' || this.state.contactCrisisCenter.number !== '') {
+      this.handleCall(parseInt(this.state.contactCrisisCenter.number, 10));
+    } else {
+      this.setState({ isNameContactCrisisCenterDialogVisible: true });
+    }
   }
 
   getStateFromStorageAndSetState = async () => {
@@ -213,58 +206,87 @@ class SafetyPlanScreen extends React.Component {
 
   sendContactInformation(stateParameter, inputText) {
     const index = this.state.auxiliarIndex;
-    const stateParameterIndex = (this.state[stateParameter][index]);
+    let auxiliarStateModifier;
     switch (stateParameter) {
       case 'contacts':
-        // console.log("AAAAAAA");
-        // console.log('TEST: ');
-        // console.log(stateParameterIndex);
-        // this.setState({ [this.state[stateParameter][index]]: { name: inputText, number: this.state[stateParameter][index].number } });
-        // console.log("BBBBBBB");
-        // console.log(this.state);
+        auxiliarStateModifier = this.state.contacts.slice();
+        auxiliarStateModifier[index] = { name: inputText, number: this.state[stateParameter][index].number };
+        this.setState({ contacts: auxiliarStateModifier });
+        this.setState({ isNameContactDialogVisible: false });
+        this.setState({ isNumberContactDialogVisible: true });
         break;
       case 'contactCrisisCenter':
-
+        auxiliarStateModifier = this.state.contactCrisisCenter;
+        auxiliarStateModifier = { name: inputText, number: this.state[stateParameter].number };
+        this.setState({ contactCrisisCenter: auxiliarStateModifier });
+        this.setState({ isNameContactCrisisCenterDialogVisible: false });
+        this.setState({ isNumberContactCrisisCenterDialogVisible: true });
         break;
       case 'professionalsToCall':
-
+        auxiliarStateModifier = this.state.professionalsToCall.slice();
+        auxiliarStateModifier[index] = { name: inputText, number: this.state[stateParameter][index].number };
+        this.setState({ professionalsToCall: auxiliarStateModifier });
+        this.setState({ isNameProfessionalsToCallDialogVisible: false });
+        this.setState({ isNumberProfessionalsToCallDialogVisible: true });
         break;
     
       default:
         break;
     }
-
-    /*
-      contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
-      contactCrisisCenter: { name: '', phone: '' }, 
-      professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
-    */
-
-    this.setState({ isNameContactDialogVisible: false });
-    this.setState({ isNumberContactDialogVisible: true });
   }
 
   sendContactInformation2(stateParameter, inputText) {
-    const index = this.auxiliarIndex;
+    const index = this.state.auxiliarIndex;
+    let auxiliarStateModifier;
+
     switch (stateParameter) {
       case 'contacts':
-        
+        auxiliarStateModifier = this.state.contacts.slice();
+        auxiliarStateModifier[index] = { name: this.state[stateParameter][index].name, number: inputText };
+        this.setState({ contacts: auxiliarStateModifier });
+        this.setState({ isNumberContactDialogVisible: false });
         break;
       case 'contactCrisisCenter':
-
+        auxiliarStateModifier = this.state.contactCrisisCenter;
+        auxiliarStateModifier = { name: this.state[stateParameter].name, number: inputText };
+        this.setState({ contactCrisisCenter: auxiliarStateModifier });
+        this.setState({ isNumberContactCrisisCenterDialogVisible: false });
         break;
       case 'professionalsToCall':
-
+        auxiliarStateModifier = this.state.professionalsToCall.slice();
+        auxiliarStateModifier[index] = { name: this.state[stateParameter][index].name, number: inputText };
+        this.setState({ professionalsToCall: auxiliarStateModifier });
+        this.setState({ isNumberProfessionalsToCallDialogVisible: false });
         break;
     
       default:
         break;
     }
-
-    this.setState({ isNumberContactDialogVisible: false });
   }
 
   onButtonPress = async () => {
+    // this.setState(
+    //   {
+    //     alertSigns: ['', '', '', ''],
+    //     copingStrategy: ['', '', '', ''],
+    //     contacts: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    //     contactCrisisCenter: { name: '', number: '', phone: '' },  
+    //     reasonsToLive: ['', '', '', ''],
+    //     placesToDistract: ['', '', '', ''],
+    //     reducingRisks: ['', '', '', ''],
+    //     recovery: '',
+    //     professionalsToCall: [{ name: '', number: '' }, { name: '', number: '' }, { name: '', number: '' }], 
+    //     isNameContactDialogVisible: false,
+    //     isNumberContactDialogVisible: false,
+    //     isNameContactCrisisCenterDialogVisible: false,
+    //     isNumberContactCrisisCenterDialogVisible: false,
+    //     isNameProfessionalsToCallDialogVisible: false,
+    //     isNumberProfessionalsToCallDialogVisible: false,
+    //     auxiliarIndex: 0,
+    //   //   keepingEnvironmentSafe: '',
+    //   }
+    // );
+
     const saveState = JSON.stringify(this.state);
     console.log(saveState);
 
@@ -326,14 +348,14 @@ class SafetyPlanScreen extends React.Component {
                   <Text>{this.state.contacts[0].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contactMiddle} onPress={() => this.onChangeContact(1, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contactMiddle} onPress={() => this.onChangeContact(1, '', '')}>
                   <TabBarIcon 
                     name={'md-contact'}
                   />
                   <Text>{this.state.contacts[1].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeContact(2, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeContact(2, '', '')}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
@@ -344,7 +366,7 @@ class SafetyPlanScreen extends React.Component {
 
             <CardSection>
               <View style={styles.contactColumn}>
-                <TouchableOpacity style={styles.contactCrisisTouchableOpacity} onPress={this.onChangeContactCrisisCenter('name', 99999999)}>
+                <TouchableOpacity style={styles.contactCrisisTouchableOpacity} onPress={() => this.onChangeContactCrisisCenter('', '')}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
@@ -422,21 +444,21 @@ class SafetyPlanScreen extends React.Component {
 
             <CardSection>
               <View style={styles.contactRow}>
-                <TouchableOpacity style={styles.contacts} onPress={this.onChangeProfessionalsToCall(0, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeProfessionalsToCall(0, '', '')}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
                   <Text>{this.state.professionalsToCall[0].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contactMiddle} onPress={this.onChangeProfessionalsToCall(1, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contactMiddle} onPress={() => this.onChangeProfessionalsToCall(1, '', '')}>
                   <TabBarIcon 
                     name={'md-contact'}
                   />
                   <Text>{this.state.professionalsToCall[1].name}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.contacts} onPress={this.onChangeProfessionalsToCall(2, 'name', 99999999)}>
+                <TouchableOpacity style={styles.contacts} onPress={() => this.onChangeProfessionalsToCall(2, '', '')}>
                   <TabBarIcon
                     name={'md-contact'}
                   />
@@ -501,7 +523,7 @@ class SafetyPlanScreen extends React.Component {
             message={'Digite o número do profissional'}
             hintInput={'Número'}
             submitInput={(inputText) => { this.sendContactInformation2('professionalsToCall', inputText); }}
-            closeDialog={() => { this.setState({ isNumberContactCrisisCenterDialogVisible: false }); }}>
+            closeDialog={() => { this.setState({ isNumberProfessionalsToCallDialogVisible: false }); }}>
         </DialogInput>
 
       </KeyboardAvoidingView>

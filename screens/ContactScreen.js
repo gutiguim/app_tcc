@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Image, Text, View, Linking, ToastAndroid, AsyncStorage } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import { Ionicons } from '@expo/vector-icons';
 import DialogInput from 'react-native-dialog-input';
 
 class ContactSreen extends React.Component {
@@ -9,12 +8,12 @@ class ContactSreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      contact0: { name: 'Sem contato salvo', number: '' },
-      contact1: { name: 'Sem contato salvo', number: '' },
-      contact2: { name: 'Sem contato salvo', number: '' },
-      contact3: { name: 'Sem contato salvo', number: '' },
-      contact4: { name: 'Sem contato salvo', number: '' },
-      contact5: { name: 'Sem contato salvo', number: '' },
+      contact0: { name: 'Insira contato', number: '' },
+      contact1: { name: 'Insira contato', number: '' },
+      contact2: { name: 'Insira contato', number: '' },
+      contact3: { name: 'Insira contato', number: '' },
+      contact4: { name: 'Insira contato', number: '' },
+      contact5: { name: 'Insira contato', number: '' },
       isNameContactDialogVisible: false,
       isNumberContactDialogVisible: false,
       auxiliarIndex: 0,
@@ -59,7 +58,7 @@ class ContactSreen extends React.Component {
   handleCall = (index, stateName) => {
     this.setState({ auxiliarIndex: index });
 
-    if (this.state[stateName].name === 'Sem contato salvo') {
+    if (this.state[stateName].name === 'Insira contato' && this.state[stateName].number === '') {
       this.setState({ isNameContactDialogVisible: true });
     } else {
       // WebBrowser.openBrowserAsync('http://docs.expo.io');
